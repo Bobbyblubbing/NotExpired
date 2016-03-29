@@ -1,4 +1,4 @@
-# NotExpired v0.0.1-beta
+# NotExpired v0.1.0
 
 ##Bugs
 * None known so far
