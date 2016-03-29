@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # NotExpired v0.1.1
+=======
+# NotExpired v0.1.0
+>>>>>>> origin/master
 
 ##Bugs
 * Not all exceptions are caught correctly
