@@ -1,12 +1,12 @@
 # NotExpired v0.0.1-beta
 
-#Bugs
+##Bugs
 * None known so far
 
-#Fixes
+##Fixes
 * None
 
-#Additions
+##Additions
 * Databases and Items to keep track of.
 * Simple GUI
 
