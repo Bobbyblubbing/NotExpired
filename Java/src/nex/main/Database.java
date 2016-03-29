@@ -8,6 +8,20 @@ import java.util.List;
  * Created by jsomani on 3/28/2016.
  */
 public class Database implements Serializable {
+    String dbName;
+
+    public String getDbName() {
+        return dbName;
+    }
+
+    public void setDbName(String dbName) {
+        this.dbName = dbName;
+    }
+
+    public Database(String dbName) {
+        this.dbName = dbName;
+    }
+
     List database = new ArrayList<Item>();
 
 
@@ -16,6 +30,10 @@ public class Database implements Serializable {
     }
     public void delItem(Item item) {
         database.remove(item);
+    }
+
+    public List getDatabase() {
+        return database;
     }
 
 

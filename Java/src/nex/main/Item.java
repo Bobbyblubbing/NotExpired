@@ -6,19 +6,19 @@ import java.io.Serializable;
  * Created by jsomani on 3/28/2016.
  */
 public class Item implements Serializable {
-    double daysToExpire;
+    int daysToExpire;
     String name;
 
-    public Item(double daysToExpire, String name) {
+    public Item(int daysToExpire, String name) {
         this.daysToExpire = daysToExpire;
         this.name = name;
     }
 
-    public double getDaysToExpire() {
+    public int getDaysToExpire() {
         return daysToExpire;
     }
 
-    public void setDaysToExpire(double daysToExpire) {
+    public void setDaysToExpire(int daysToExpire) {
         this.daysToExpire = daysToExpire;
     }
 
@@ -32,9 +32,6 @@ public class Item implements Serializable {
 
     @Override
     public String toString() {
-        return "Item{" +
-                "daysToExpire=" + daysToExpire +
-                ", name='" + name + '\'' +
-                '}';
+        return "Item: " + "'" + name + "'";
     }
 }

@@ -1,12 +1,13 @@
-# NotExpired v0.0.1-beta
+# NotExpired v0.1.1
 
 ##Bugs
-* None known so far
+* Not all exceptions are caught correctly
 
 ##Fixes
 * None
 
 ##Additions
-* Databases and Items to keep track of.
-* Simple GUI
+* Autosave system, automagically saves database to disk
+* Database editor, allows edit/add/remove from database
+* Updated GUI, added new menu
 

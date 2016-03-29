@@ -9,7 +9,7 @@ import java.io.*;
  */
 public class io {
     public static void saveDatabase(String path, Database d) {
-        try(FileOutputStream fs = new FileOutputStream(path)) {
+        try (FileOutputStream fs = new FileOutputStream(path)) {
 
             ObjectOutputStream os = new ObjectOutputStream(fs);
 
@@ -21,8 +21,22 @@ public class io {
             e.printStackTrace();
         }
     }
+
+    public static void autoSaveDatabase(String path, Database d) {
+        try(FileOutputStream fs = new FileOutputStream(path)) {
+
+            ObjectOutputStream os = new ObjectOutputStream(fs);
+
+            os.writeObject(d);
+
+            os.close();
+
+        } catch (IOException e) {
+           //do nothing if the user hasn't set his Current DB since it's autosave
+        }
+    }
     public static Database readDatabase(String path) {
-        Database dbOut = new Database();
+        Database dbOut = new Database("");
         try(FileInputStream fi = new FileInputStream(path)) {
 
             ObjectInputStream os = new ObjectInputStream(fi);
