@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
  * Created by jsomani on 3/28/2016.
  */
 public class MainGUI extends JFrame {
-    public static final String NEX_VERSION = "v0.0.1-beta";
+    public static final String NEX_VERSION = "v0.1.0";
     private JLabel titleLabel = new JLabel("NotExpired", JLabel.CENTER);
     private JLabel subtitleLabel = new JLabel(NEX_VERSION, JLabel.CENTER);
     protected Font headingFont = new Font("Segoe UI", Font.BOLD, 72);
