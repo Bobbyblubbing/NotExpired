@@ -1,12 +1,8 @@
-# NotExpired v0.0.1-beta
+# NotExpired
 
-##Bugs
-* None known so far
-
-##Fixes
-* None
-
-##Additions
-* Databases and Items to keep track of.
-* Simple GUI
+## Windows Edition
+ * In Progress (v0.0.1-beta)
+ 
+## Android Edition
+ * Not In Progress (v0.0.1-beta)
 
