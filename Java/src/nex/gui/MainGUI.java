@@ -18,7 +18,11 @@ import java.util.Date;
  *
  */
 public class MainGUI extends JFrame {
+<<<<<<< HEAD
     public static final String NEX_VERSION = "v0.1.3";
+=======
+    public static final String NEX_VERSION = "v0.1.1";
+>>>>>>> origin/master
     private JLabel titleLabel = new JLabel("NotExpired", JLabel.CENTER);
     private JLabel subtitleLabel = new JLabel(NEX_VERSION, JLabel.CENTER);
     protected Font headingFont = new Font("Segoe UI", Font.BOLD, 72);
