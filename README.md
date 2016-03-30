@@ -1,7 +1,7 @@
 # NotExpired
 
 ## Windows / Java Edition
-* In Progress (v0.1.3)
+* In Progress (v0.1.2)
 
  
 ## Android Edition
