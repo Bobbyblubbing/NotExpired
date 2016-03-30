@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -16,9 +15,10 @@ import java.util.Date;
 
 /**
  * Created by jsomani on 3/28/2016.
+ *
  */
 public class MainGUI extends JFrame {
-    public static final String NEX_VERSION = "v0.1.0";
+    public static final String NEX_VERSION = "v0.1.2";
     private JLabel titleLabel = new JLabel("NotExpired", JLabel.CENTER);
     private JLabel subtitleLabel = new JLabel(NEX_VERSION, JLabel.CENTER);
     protected Font headingFont = new Font("Segoe UI", Font.BOLD, 72);
@@ -28,6 +28,9 @@ public class MainGUI extends JFrame {
     private JButton checkItem = new JButton("Check Item");
     private JButton quitButton = new JButton("Quit");
     public String currentDatabasePath = "";
+    private JMenuBar menuBar = new JMenuBar();
+    private JMenu fileBar = new JMenu("File");
+    private JMenuItem saveBtn = new JMenuItem("Save");
     Database currentDatabase = new Database("Null Database");
 
     public MainGUI() {
@@ -40,7 +43,15 @@ public class MainGUI extends JFrame {
         add(subtitleLabel);
         add(checkItem);
         add(settingsButton);
-        add(quitButton); //taking a new way to use action listener
+        add(quitButton);
+        menuBar.add(fileBar);
+        fileBar.add(saveBtn);
+        saveBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                io.saveDatabase(getCurrentDatabasePath(),getCurrentDatabase());
+            }
+        });
         checkItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,8 +74,6 @@ public class MainGUI extends JFrame {
     }
 
     public void runItemCheck() {
-        getCurrentDatabase().addItem(new Item(21,"test"));
-        Date resultDate;
         Date dateExpire;
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
         if(currentDatabase.getDatabase().isEmpty()) {
@@ -74,16 +83,17 @@ public class MainGUI extends JFrame {
             try {
                 Item item = (Item)JOptionPane.showInputDialog(null,"Select your item from the current database","Select item",JOptionPane.PLAIN_MESSAGE,null,getCurrentDatabase().getDatabase().toArray(),null);
                 dateExpire = dateFormat.parse(JOptionPane.showInputDialog(null,"Please enter the date your item will expire: (MM/DD/YYYY)"));
-                System.out.println(dateFormat.format(dateExpire));
                 Calendar c = Calendar.getInstance();
                 c.setTime(dateExpire);
                 c.add(Calendar.DATE, item.getDaysToExpire()); // number of days to add
                 dateExpire = c.getTime();  //this is now the new date
-                System.out.println(dateFormat.format(dateExpire));
+                JOptionPane.showMessageDialog(null,"This item will probably last until " + dateFormat.format(dateExpire) +".");
 
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(null,"Unable to parse date from input.");
             }
+
+
         }
 
     }
@@ -112,6 +122,7 @@ public class MainGUI extends JFrame {
         JButton editDBButton = new JButton("Edit Database");
         JButton backButton = new JButton("Back");
         JFrame settingsFrame = new JFrame("Settings");
+        settingsFrame.setJMenuBar(menuBar);
         settingsTitleLabel.setFont(headingFont);
         settingsSubtitleLabel.setFont(smallFont);
         settingsFrame.getContentPane().setBackground(Color.GRAY);
@@ -125,6 +136,7 @@ public class MainGUI extends JFrame {
         settingsFrame.add(backButton);
         settingsFrame.add(editDBButton);
         settingsFrame.pack();
+        settingsFrame.setLocationRelativeTo(null);
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -150,16 +162,17 @@ public class MainGUI extends JFrame {
                 jf.showOpenDialog(null);
                 setCurrentDatabasePath(jf.getSelectedFile().getAbsolutePath());
                 io.saveDatabase(getCurrentDatabasePath(), new Database(newDBName));
+                setCurrentDatabase(io.readDatabase(currentDatabasePath));
             }
         });
         editDBButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getCurrentDatabase().addItem(new Item(21,"test"));
                 int editMenu = JOptionPane.showOptionDialog(null,"What would you like to edit in '"+getCurrentDatabase().getDbName() + "'?","Edit DB",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,new String[] {"DB Name","DB Items"},null);
                 if(editMenu == 0) {
                     String newDBName = JOptionPane.showInputDialog(null, "Rename database:");
                     getCurrentDatabase().setDbName(newDBName);
+
                 }
                 else if(editMenu == 1) {
                     int editMenu2 = JOptionPane.showOptionDialog(null, "Choose a selection,", "Edit DB", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Add Item", "Remove Item", "Edit Item"}, null);
@@ -187,7 +200,7 @@ public class MainGUI extends JFrame {
                             itemChoice.setDaysToExpire(Integer.parseInt(newItemDaysToExpire));
                         }
                         catch(NumberFormatException f) {
-                            JOptionPane.showConfirmDialog(null, "You typed something incorrectly.");
+                            JOptionPane.showMessageDialog(null, "You typed something incorrectly.");
                         }
                     }
                 }
@@ -204,6 +217,7 @@ public class MainGUI extends JFrame {
         m.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         m.pack();
         m.setResizable(false);
+        m.setJMenuBar(m.menuBar);
         m.setVisible(true);
         m.setLocationRelativeTo(null);
         JOptionPane.showMessageDialog(null,"Note: Be sure to always save your databases.\nThe Autosave system may not catch your work.");

@@ -30,6 +30,7 @@ public class Database implements Serializable {
     }
     public void delItem(Item item) {
         database.remove(item);
+
     }
 
     public List getDatabase() {

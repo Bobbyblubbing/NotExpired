@@ -1,17 +1,15 @@
-<<<<<<< HEAD
-# NotExpired v0.1.1
-=======
-# NotExpired v0.1.0
->>>>>>> origin/master
+# NotExpired v0.1.3
+
 
 ##Bugs
-* Not all exceptions are caught correctly
+* Still not all exceptions are caught correctly
+* Autosave doesn't save (Not Issued)
 
 ##Fixes
-* None
+* Minor dialog box issues
 
 ##Additions
-* Autosave system, automagically saves database to disk
-* Database editor, allows edit/add/remove from database
-* Updated GUI, added new menu
+* Improved database editor, allows edit/add/remove from database
+* Added Menu bar for manual saving
+
 
